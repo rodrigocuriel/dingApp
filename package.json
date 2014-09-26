@@ -1,0 +1,19 @@
+{
+  "name": "node-arduino-dingApp",
+  "version": "0.0.1",
+  "description": "node.js app to call for code reviews",
+  "main": "dingApp.js",
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "johnny-five": "~0.7.28"
+  },
+  "devDependencies": {
+    "body-parser": "~1.9.0",
+    "express": "~4.9.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodrigo Curiel",
+  "license": "MIT"
+}
