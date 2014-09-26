@@ -5,14 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Code Review remote caller</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,31 +21,20 @@
     <div class="row">
         <div class="col-md-4">
             <h4>Ring the Bell</h4>
-
-            <p>
-                <button id="solenoidBtn" class="btn btn-primary">now !</button>
-            </p>
+            <button id="solenoidBtn" class="btn btn-primary">now !</button>
 
             <h4>LED Pulse Delay (ms)</h4>
-
-            <label for=fader>LED Pulse Delay (ms)</label>
-            <input type=range min=0 max=100 value=50 id=fader step=1 onchange="outputUpdate(value)">
-            <output for=fader id=volume>50</output>
-
-            <p><input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000"/></p>
-
-
-            <p>
-                <button id="ledSet" class="btn btn-primary">Set Delay</button>
-            </p>
+            <input type="text" class="form-control" id="ledDelay" name="ledDelay" value="1000"/>
+            <button id="ledSet" class="btn btn-primary">Set Delay</button>
         </div>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var socket = io.connect('http://192.168.66.121');
+    var socket = io.connect('http://localhost');
 
     socket.on('news', function(data) {
         console.log(data);
@@ -71,7 +54,6 @@
     function outputUpdate(vol) {
         document.querySelector('#volume').value = vol;
     }
-
 </script>
 </body>
 </html>

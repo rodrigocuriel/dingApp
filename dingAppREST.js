@@ -1,17 +1,14 @@
 // server.js
-
 // BASE SETUP
 // =============================================================================
 
-// call the packages we need
-var express = require('express'); 		// call express
-var app = express(); 				// define our app using express
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
 var five = require("johnny-five");
 var arduinoBoard = new five.Board();
 var ledPIN = {};
 var bellPIN = {};
-
 
 // on board ready
 arduinoBoard.on("ready", function() {
@@ -26,7 +23,7 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8110; 		// set our port
 
-// ROUTES FOR OUR API
+// ROUTES FOR OUR DING API
 // =============================================================================
 var router = express.Router(); 				// get an instance of the express Router
 
@@ -37,14 +34,14 @@ router.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+// test route to make sure everything is working (accessed at GET http://localhost:8080/dingApp)
 router.get('/', function(req, res) {
     res.json({ message : 'hooray! welcome to Code Review!' });
 });
 
 router.route('/bell')
 
-    // create a POST (accessed at POST http://localhost:8110/api/bell)
+    // create a POST (accessed at POST http://localhost:8110/dingApp/bell)
     .post(function(req, res) {
         if(arduinoBoard.isReady) {
             bellPIN.on();
@@ -58,10 +55,10 @@ router.route('/bell')
 // more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
-app.use('/api', router);
+// all of our routes will be prefixed with /dingApp
+app.use('/dingApp', router);
 
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('dingApp listening ' + port);
