@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var fs = require('fs');
 var five = require("johnny-five");
 var arduinoBoard = new five.Board();
 var ledPIN = {};
@@ -33,7 +34,16 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:<PORT>/dingApp)
 router.get('/', function(req, res) {
-    res.json({ message : 'hooray! welcome to Code Review!' });
+    fs.readFile(__dirname + '/index.html',
+        function(err, data) {
+            if(err) {
+                res.writeHead(500);
+                return res.end('Error loading index.html');
+            }
+
+            res.writeHead(200);
+            res.end(data);
+        });
 });
 
 // create a POST (accessed at POST http://localhost:<PORT>/dingApp/bell)
@@ -66,7 +76,7 @@ router.route('/led')
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /dingApp
-app.use('/dingApp', router);
+app.use('/', router);
 
 // START THE SERVER
 // =============================================================================
