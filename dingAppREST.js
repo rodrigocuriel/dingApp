@@ -47,8 +47,8 @@ router.route('/bell')
 
 router.route('/led')
     .post(function(req, res) {
-        if(board.isReady) {
-            led.strobe(req.body.delay);
+        if(arduinoBoard.isReady) {
+            ledPIN.strobe(req.body.delay);
             res.json({ message : 'LED strobe delay' + req.body.delay });
 
         }
