@@ -47,9 +47,10 @@ router.route('/bell')
 
 router.route('/led')
     .post(function(req, res) {
-        console.log("Changing LED strobe delay to", data.delay);
         if(board.isReady) {
             led.strobe(req.body.delay);
+            res.json({ message : 'LED strobe delay' + req.body.delay });
+
         }
     });
 
