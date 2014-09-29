@@ -36,12 +36,13 @@ router.get('/', function(req, res) {
 // create a POST (accessed at POST http://localhost:<PORT>/dingApp/bell)
 router.route('/bell')
     .post(function(req, res) {
+        console.log('Bell delay', req.body.delay);
         if(arduinoBoard.isReady) {
             bellPIN.on();
             setTimeout(function() {
                 bellPIN.off();
             }, req.body.delay);
-            res.json({ message : 'Bell dinged!' });
+            res.json({ message : 'Bell dinged!' + req.body.delay });
         }
     });
 
