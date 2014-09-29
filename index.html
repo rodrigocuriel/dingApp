@@ -37,7 +37,7 @@
         var delayInMS = 15;
         $.ajax({
             type : 'POST',
-            url : 'http://html5build:8110/dingApp/bell',
+            url : 'http://html5build:8110/bell',
             data : JSON.stringify({
                 delay : delayInMS
             }),
@@ -56,7 +56,7 @@
         var delayInMS = parseInt($('#ledDelay').val(), 10);
         $.ajax({
             type : 'POST',
-            url : 'http://html5build:8110/dingApp/led',
+            url : 'http://html5build:8110/led',
             data : JSON.stringify({
                 delay : delayInMS
             }),
