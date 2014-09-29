@@ -10,13 +10,16 @@ arduinoBoard.on("ready", function() {
     bellPIN = new five.Led(2);
     ledPIN = new five.Led(8).strobe(1000);
 });
+arduinoBoard.on("error", function() {
+    console.log('error connecting with Arduino');
+});
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8210; 		// set our port
+var port = process.env.PORT || 8110; 		// set our port
 
 // ROUTES FOR OUR DING API
 // =============================================================================
@@ -42,7 +45,9 @@ router.route('/bell')
             setTimeout(function() {
                 bellPIN.off();
             }, req.body.delay);
-            res.json({ message : 'Bell dinged!' + req.body.delay });
+            res.json({ message : 'delay for bell: ' + req.body.delay });
+        } else {
+            res.json({ message : 'delay for bell: ' + req.body.delay });
         }
     });
 
@@ -51,7 +56,9 @@ router.route('/led')
         console.log('LED strobe delay', req.body.delay);
         if(arduinoBoard.isReady) {
             ledPIN.strobe(req.body.delay);
-            res.json({ message : 'LED strobe delay' + req.body.delay });
+            res.json({ message : 'delay for LED strobe: ' + req.body.delay });
+        } else {
+            res.json({ message : 'delay for LED strobe: ' + req.body.delay });
         }
     });
 
