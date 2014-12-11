@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 
 router.route('/bell')
     .post(function(req, res) {
-        var player = new Player('./sounds/desk_bell.mp3');
+        var player = new Player('./sounds/desk_bell_boosted.mp3');
 	    player.play();
 	    res.json({ message : 'playing sound since no Arduino found '});
     });
